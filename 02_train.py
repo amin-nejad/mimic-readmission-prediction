@@ -9,7 +9,7 @@ import logging
 from pytorch_transformers import BertTokenizer
 from fast_bert.data_cls import BertDataBunch
 from fast_bert.learner_cls import BertLearner
-from fast_bert.metrics import accuracy, fbeta, roc_auc
+from fast_bert.metrics import accuracy, roc_auc
 from fast_bert.prediction import BertClassificationPredictor
 
 # check if (multiple) GPUs are available
@@ -33,7 +33,6 @@ logger = logging.getLogger()
 metrics = []
 metrics.append({'name': 'accuracy', 'function': accuracy})
 metrics.append({'name': 'roc_auc', 'function': roc_auc})
-metrics.append({'name': 'fbeta', 'function': fbeta})
 
 BASE = Path('data/readmission_prediction//')
 LABEL_PATH = BASE
@@ -82,12 +81,12 @@ def train(path_to_directory, model):
                                                 multi_gpu=multi_gpu,
                                                 is_fp16=True,
                                                 multi_label=False,
-                                                logging_steps=20)
+                                                logging_steps=40)
     
     if path_to_directory.split('/',1)[1] in ['original','synthetic']:
-        epochs = 20
-    else:
         epochs = 10
+    else:
+        epochs = 5
         
     learner.fit(epochs=epochs,
                 lr=6e-5,
