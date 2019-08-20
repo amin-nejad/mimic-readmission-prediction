@@ -47,9 +47,15 @@ def train(path_to_directory, model):
         tokenizer = BertTokenizer.from_pretrained(BIOBERT_PATH, 
                                                   do_lower_case=True)
         pretrained_path=BIOBERT_PATH
+        model_type = "bert"
     elif (model == "bert"):
         tokenizer = "bert-base-uncased"
         pretrained_path="bert-base-uncased"
+        model_type = "bert"
+    elif (model == "xlnet"):
+        tokenizer = "xlnet-base-cased"
+        pretrained_path="xlnet"
+        model_type = "xlnet"
     else:
         print ("Model parameter must be either 'bert' or 'biobert'")
         return
@@ -66,8 +72,8 @@ def train(path_to_directory, model):
                               max_seq_length=512,
                               multi_gpu=multi_gpu,
                               multi_label=False,
-                              model_type='bert',
-                              clear_cache=True)
+                              model_type=model_type)
+                              #clear_cache=True)
     
     learner = BertLearner.from_pretrained_model(databunch,
                                                 pretrained_path=pretrained_path,
@@ -96,6 +102,8 @@ def train(path_to_directory, model):
     
     return
 
-for directory in ['original','original_2x','synthetic','combined','original_eda']:
-    for model in ['biobert','bert']:
-        train('transformer/'+directory, model)
+#for directory in ['original','original_2x','synthetic','original_eda']:
+#    for model in ['biobert','bert']:
+#        train('transformer/'+directory, model)
+train('transformer/original_eda','biobert')
+train('transformer/original_eda','bert')
