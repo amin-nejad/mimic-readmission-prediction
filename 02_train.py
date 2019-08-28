@@ -105,5 +105,7 @@ def train(path_to_directory, model):
 #for directory in ['original','original_2x','synthetic','original_eda']:
 #    for model in ['biobert','bert']:
 #        train('transformer/'+directory, model)
-train('transformer/original_eda','biobert')
-train('transformer/original_eda','bert')
+train('gpt2/synthetic','biobert')
+train('gpt2/synthetic','bert')
+train('gpt2/combined','biobert')
+train('gpt2/combined','bert')
