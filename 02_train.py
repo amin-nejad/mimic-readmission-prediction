@@ -33,7 +33,7 @@ logger = logging.getLogger()
 metrics = []
 metrics.append({'name': 'accuracy', 'function': accuracy})
 
-BASE = Path('data/readmission_prediction//')
+BASE = Path('data/readmission_prediction/low_resource/')
 LABEL_PATH = BASE
 BIOBERT_PATH = Path('biobert/')
 
@@ -104,8 +104,9 @@ def train(path_to_directory, model):
 
 #for directory in ['original','original_2x','synthetic','original_eda']:
 #    for model in ['biobert','bert']:
-#        train('transformer/'+directory, model)
-train('gpt2/synthetic','biobert')
-train('gpt2/synthetic','bert')
-train('gpt2/combined','biobert')
-train('gpt2/combined','bert')
+#        train('gpt2/'+directory, model)
+
+train('transformer/synthetic','biobert')
+train('transformer/synthetic','bert')
+train('transformer/combined','biobert')
+train('transformer/combined','bert')
