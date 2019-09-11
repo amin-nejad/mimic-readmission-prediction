@@ -1,6 +1,8 @@
 # mimic-readmission-prediction
 
-This repository contains the code for the downstream readmission prediction task. Follow the steps below:
+This repository contains the code for a downstream readmission prediction task related to models trained using https://github.com/amin-nejad/mimic-text-generation. The task is to identify patients from the MIMIC-III dataset who will have an unplanned readmission within 30 days using only their discharge summaries. 
+
+Follow the steps below:
 
 
 1. Install the environment
